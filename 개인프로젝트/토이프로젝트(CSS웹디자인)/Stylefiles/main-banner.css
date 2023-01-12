@@ -1,0 +1,175 @@
+#main-banner{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(54, 53, 53);
+}
+#main-banner1{
+    width: 450px;
+    height: 174px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 10;
+}
+#main-banner1 *{
+    z-index: 10;
+}
+.update-icon{
+    width: 144px;
+    height: 144px;
+    border-radius: 90px;
+
+}
+.update-text{
+    width: 270px;
+    height: 144px;
+    padding: 0px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.update-text1{
+    width: 100%;
+    font-size: 24px;
+    color: rgb(241, 116, 43);
+    margin-bottom: 5px;
+}
+.update-text2{
+    width: 100%;
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.74);
+    margin-top: 5px;
+}
+.update-icon{
+    background-image: url("../sourcefiles/image/정보센터용.png");
+    background-size: cover;
+}
+#main-banner2{
+    width: 180px;
+    height: 100%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+#main-banner2:hover>.ovfont{
+    background-image: url("../sourcefiles/image/파란색로고빠른버전.gif");
+    z-index: 10;
+    font-size: 25px;
+    color: rgb(241, 172, 43);
+    text-shadow: 2px 2px 1px black;
+}
+#main-banner2>.play-hover-background{
+    width: 180px;
+    height: 100%;
+    background-color: rgb(4, 64, 112);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 2;
+}
+#main-banner2:hover>.ovfont+.play-hover-background{
+    left: -880px;
+    width: 1920px;
+    z-index: 2;
+    transition-duration: 1s;
+    transition-timing-function: ease-in;
+}
+
+#main-banner2>.ovfont{
+    padding: 75px 0px;
+    font-size: 25px;
+    width: 100%;
+    height: 100%;
+    background-image: url("../sourcefiles/image/검은색플레이버튼.gif");
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+    color: black;
+    text-shadow: 2px 2px 2px white;
+    z-index: 10;
+}
+#main-banner3{
+    width: 436px;
+    height: 110px; 
+    z-index: 10;   
+}
+#main-banner3 *{
+    z-index: 10;
+}
+#main-banner3 a{
+    font-family: 'Koverwatch';
+}
+#main-banner3>div>div{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.login-top{
+    height: 56px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+}
+.login-top a{
+    color: white;
+}
+.login-center{
+    height: 38px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.login-center a{
+    color: white;
+    font-size: 14px;
+}
+.login-bottom{
+    height: 15px;
+}
+.blizzard-login{
+    height: 100%;
+    width: 214px;
+    background-color: rgb(241, 116, 43);
+    border-radius: 5px;
+}
+.blizzard-login:hover{
+    filter: brightness(110%);
+}
+.steam-login{
+    height: 100%;
+    width: 214px;
+    background-color: #1ea9fb;
+    border-radius: 5px;
+}
+.steam-login:hover{
+    filter: brightness(110%);
+}
+.qr-login{
+    height: 100%;
+    width: 134px;
+    background-color: black;
+    border-radius: 5px;
+}
+.qr-login:hover{
+    background-color: rgb(22, 22, 22);
+}
+.others-login{
+    height: 100%;
+    width: 298px;
+    background-color: black;
+    border-radius: 5px;
+}
+.others-login:hover{
+    background-color: rgb(22, 22, 22);
+}
+.login-bottom {
+    font-size: 12px;
+    color: rgb(190, 187, 187);
+}
+.login-bottom > a {
+    font-size: 12px;
+    color: rgb(190, 187, 187);
+}

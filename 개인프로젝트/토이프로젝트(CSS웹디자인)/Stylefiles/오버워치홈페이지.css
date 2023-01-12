@@ -1,0 +1,216 @@
+@font-face {font-family: "Koverwatch";
+    src: url("../sourcefiles/fonts/Koverwatch/Regular.ttf");
+    src: url("http://db.onlinewebfonts.com/t/1f00b50091b5a28cccf7b552ceefc8cd.eot"); /* IE9*/
+    src: url("http://db.onlinewebfonts.com/t/1f00b50091b5a28cccf7b552ceefc8cd.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("http://db.onlinewebfonts.com/t/1f00b50091b5a28cccf7b552ceefc8cd.woff2") format("woff2"), /* chrome firefox */
+    url("http://db.onlinewebfonts.com/t/1f00b50091b5a28cccf7b552ceefc8cd.woff") format("woff"), /* chrome firefox */
+    url("http://db.onlinewebfonts.com/t/1f00b50091b5a28cccf7b552ceefc8cd.ttf") format("truetype"), /* chrome firefox opera Safari, Android, iOS 4.2+*/
+    url("http://db.onlinewebfonts.com/t/1f00b50091b5a28cccf7b552ceefc8cd.svg#Koverwatch") format("svg"); /* iOS 4.1- */
+}
+html{
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+}
+body {
+    margin: 0px 0px 0px 0px;
+    overflow-x: hidden;
+}
+video{
+    margin: 0px 0px 0px 0px; 
+    position: absolute;
+    top: -140px;
+    min-width: 1124px;
+}
+.text{
+    font-family: 'Koverwatch', 'Koverwatch';
+}
+.main-div {
+    width: 100%;
+    min-width: 1124px;
+    padding: 0px 40px 0px 0px;
+    margin-right: 20px;
+    
+}
+
+.top-bar {
+    padding: 0px 0px 0px 0px;
+    height: 62px;
+    background-color: #282d43;
+
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.top-banner {
+    padding: 0px 0px 0px 0px;
+    height: 110px;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 0px;
+}
+
+.base-background {
+    height: 560px;
+    padding: 0px 0px 0px 0px 0px;
+    /* background-color: blue; */
+    /* background-image : url(../sourcefiles/image/트레이서움짤.gif); */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* filter : blur(10px) brightness(40%); */
+    position: relative;
+}
+
+.main-image {
+    background-image : url(../sourcefiles/image/트레이서.jpg);
+    height: 420px;
+    width: 1200px;
+    margin-left: 40px;
+    display: inline-block;
+    opacity: 98%;
+    position: absolute;
+    top: 155px;
+
+}
+.main-img-flex{
+    display: flex;
+    justify-content: center;
+}
+
+.bottom-banner {
+    height: 93px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.356);
+    position: absolute;
+    top: -93px;
+
+}
+
+.login-div {
+    height: 180px;
+    background-color: #282d43;
+    position: relative;
+}
+
+.main-board {
+    height: 554px;
+    padding-top: 60px;
+    padding-right: 40px;
+    padding-left: 40px;
+    background-color: grey;
+}
+
+.copyright {
+    height: 90px;
+    background-color: #282d43;
+
+}
+
+.menu {
+    width: 107px;
+    display: inline-block;
+}
+.menu-text{
+    margin-top: 18px;
+    font-size: 18px; 
+    text-align: center;
+    color: white;
+}
+.menu-text:hover{
+    color: rgb(170, 170, 170);
+    cursor: pointer;
+}
+
+.blizzard-logo {
+    margin-left: 100px;
+    width: 200px;
+    background-image: url(../sourcefiles/image/blizzardLogo.webp);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: inline-block;
+
+}
+.blizzard-logo:hover{
+    cursor: pointer;
+    opacity: 80%;
+}
+
+.login-top {
+    width: 241.64px;
+    display: inline-block;
+    align-self: flex-end;
+}
+
+.overwatch-logo {
+    width: 170px;
+    height: 84px;
+    margin: 13px 15px 13px 100px;
+    display: inline-block;
+    background-image: url(../sourcefiles/image/오버워치2로고.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.overwatch-logo:hover{
+    cursor: pointer;
+    opacity: 80%;
+}
+
+.create-id{
+    display: inline-block;
+    margin-top: 24px;
+    font-size: 14px;
+    color: white;
+}
+.create-id:hover{
+    cursor: pointer;
+    color :rgb(170, 170, 170);
+}
+.blizzard-login{
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 15px;
+    text-align: center;
+    width: 100px;
+    height: 20px;
+    color: white;
+    border: 1px solid white;
+    border-radius: 10px;
+}
+.blizzard-login:hover{
+    cursor: pointer;
+    color: rgb(170, 170, 170);
+    border-color: rgb(170, 170, 170);;
+}
+
+.navbar {
+    width: 1038px;
+    height: 84px;
+    margin: 13px 15px 13px 0px;
+    display: inline-block;
+
+}
+.navbar-text{
+    font-size: 22px;
+    color: white;
+    margin-top: 31px;
+    display: inline-block;
+}
+.navbar-text:hover{
+    cursor: pointer;
+    color: rgb(241, 116, 43);
+}
+.navbar-flex
+{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.text-rotation{
+    margin: 30px ;
+    font-size: 80px;
+}

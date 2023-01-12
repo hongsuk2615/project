@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>토이프로젝트</title>
+    <link rel="stylesheet" href="Stylefiles/utilityclass.css">
+    <link rel="stylesheet" href="Stylefiles/header.css">
+    <link rel="stylesheet" href="Stylefiles/main-content.css">
+    <link rel="stylesheet" href="Stylefiles/main-banner.css">
+    <link rel="stylesheet" href="Stylefiles/board.css">
+    <link rel="stylesheet" href="Stylefiles/footer.css">
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        body * {
+            /*레이아웃 확인용*/
+            /* background-color: transparent !important;
+            background-image: none !important;
+            border: 1px solid royalblue !important;
+            color: white !important;  */
+
+        }
+        video{
+            /*레이아웃 확인용*/
+            /* display: none; */
+        }
+
+        div {
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        #wrap {
+            width: 100%;
+            max-width: 1920px;
+            min-width: 1124px;
+        }
+
+        #wrap>div {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #header {
+            height: 62px;
+        }
+
+        #main-content {
+            height: 560px;
+        }
+
+        #main-banner {
+            height: 180px;
+        }
+
+        #board {
+            height: 554px;
+        }
+
+        #footer {
+            height: 152px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+
+        <div id="header" class="bg-color-dark flex">
+            <div id="header1"><!--메뉴버튼-->
+
+                <div class="ovfont">
+                    <input type="radio" id="side-menu-on" name="side-menu">
+                    <div class="menu-background ovfont">
+                        <div class="side-menu-gamelist">
+                            <div class="gamelist-title">
+                                <div class="totalgame"><a href="">전체게임</a></div>
+                                <div class="clientcenter"><a href="">고객센터</a></div>
+                            </div>
+                            <div class="gamelist-content">
+                                <div class="gamelist">
+                                    <div>
+                                        <div class="gamelist-alphabet">A - Z</div>
+                                        <div class="gamelist-name">
+                                            <a href="">a a a</a>
+                                            <a href="">b b b</a>
+                                            <a href="">c c c</a>
+                                            <a href="">D D D</a>
+                                            <a href="">E E E</a>
+                                            <a href="">F F F</a>
+                                            <a href="">G G G</a>
+                                            <a href="">H H H</a>
+                                            <a href="">I I I</a>
+                                            <a href="">J J J</a>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="gamelist-alphabet">ㄱ-ㄹ</div>
+                                        <div class="gamelist-name">
+                                            <a href="">ㄱㄱㄱ</a>
+                                            <a href="">ㄴㄴㄴ</a>
+                                            <a href="">ㄷㄷㄷ</a>
+                                            <a href="">ㄹㄹㄹ</a>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="gamelist-alphabet">ㅁ-ㅅ</div>
+                                        <div class="gamelist-name">
+                                            <a href="">ㅁㅁㅁ</a>
+                                            <a href="">ㅂㅂㅂ</a>
+                                            <a href="">ㅅㅅㅅ</a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gamelist">
+                                    <div>
+                                        <div class="gamelist-alphabet">ㅇ-ㅈ</div>
+                                        <div class="gamelist-name">
+                                            <a href="">ㅇㅇㅇ</a>
+                                            <a href="">ㅈㅈㅈ</a>
+
+
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="gamelist-alphabet">ㅊ-ㅋ</div>
+                                        <div class="gamelist-name">
+                                            <a href="">ㅊㅊㅊ</a>
+                                            <a href="">ㅋㅋㅋ</a>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="gamelist-alphabet">ㅌ-ㅎ</div>
+                                        <div class="gamelist-name">
+                                            <a href="">ㅌㅌㅌ</a>
+                                            <a href="">ㅍㅍㅍ</a>
+                                            <a href="">ㅎㅎㅎ</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="side-menu-servicelist">
+                            <div><a href="">내정보</a></div>
+                            <div><a href="">이벤트</a></div>
+                            <div><a href="">캐쉬</a></div>
+                            <div><a href="">보안센터</a></div>
+                            <div><a href="">공지사항</a></div>
+                            <div><a href="">아무내용</a></div>
+                            <div><a href="">배틀넷</a></div>
+                            <div><a href="">고객센터</a></div>
+                            <div><a href="">다른계정</a></div>
+                        </div>
+                        <div class="side-menu-totalservice"><a href="">전체 서비스</a></div>
+                    </div>
+                    <input type="radio" id="side-menu-off" name="side-menu" checked>
+                    <label for="side-menu-on" class="menu-label">메뉴</label>
+
+                </div>
+            </div>
+            <div id="header2"><!--블리자드로고-->
+            </div>
+            <div id="header3"><!--로그인/회원가입-->
+                <a href="" class="ovfont make-id-box">블리자드 회원가입</a>
+                <a href="" class="ovfont login-box">블리자드 로그인</a>
+            </div>
+        </div> <!--header end-->
+
+
+        <div id="main-content">
+            <video src="sourcefiles/videos/y2mate.com - 오버워치 2 런칭 트레일러  10월 5일 무료 플레이_1080pFHR.mp4" autoplay
+                muted loop></video>
+            <div id="main-content1"> <!--오버워치로고 / navbar-->
+                <div class="content-box flex">
+                    <div class="overwatch-logo"></div>
+                    <div class="nav-bar">
+                        <ul class="ovfont">
+                            <div class="nav-bar-background"></div>
+                            <li>
+                                <a href="">게임정보</a>
+                                <ul>
+                                    <li><a href="">개요</a></li>
+                                    <li><a href="">자료실</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="">영웅</a></li>
+                            <li><a href="">시즌</a></li>
+                            <li><a href="">새소식</a></li>
+                            <li>
+                                <a href="">커뮤니티</a>
+                                <ul>
+                                    <li><a href="">토론장</a></li>
+                                    <li><a href="">오버워치 리그</a></li>
+                                    <li><a href="">컨덴더스</a></li>
+                                    <li><a href="">오픈 디비전 코리아</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="">샵</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <div id="main-content2"><!--메인화면-->
+
+            </div>
+            <div id="main-content3"><!--밑 배너-->
+                <div class="content-box ovfont pos-rel">
+                    <input type="radio" name="banner-select" id="banner-selet1" class="img1" checked>
+                    <div class="main-banner-img img1 z-index-img">
+                        <div class="main-banner-text"> 라벨1 이미지 입니다.</div>
+                    </div>
+                    <label for="banner-selet1">
+                        <div>라벨1</div>
+                    </label>
+                    <input type="radio" name="banner-select" id="banner-selet2" class="img2">
+                    <div class="main-banner-img img2 z-index-img">
+                        <div class="main-banner-text"> 라벨2 이미지 입니다.</div>
+                    </div>
+                    <label for="banner-selet2">
+                        <div>라벨2</div>
+                    </label>
+                    <input type="radio" name="banner-select" id="banner-selet3" class="img3">
+                    <div class="main-banner-img img3 z-index-img">
+                        <div class="main-banner-text"> 라벨3 이미지 입니다.</div>
+                    </div>
+                    <label for="banner-selet3">
+                        <div>라벨3</div>
+                    </label>
+                    <input type="radio" name="banner-select" id="banner-selet4" class="img4">
+                    <div class="main-banner-img img4 z-index-img">
+                        <div class="main-banner-text"> 라벨4 이미지 입니다.</div>
+                    </div>
+                    <label for="banner-selet4">
+                        <div>라벨4</div>
+                    </label>
+                    <input type="radio" name="banner-select" id="banner-selet5" class="img5">
+                    <div class="main-banner-img img5 z-index-img">
+                        <div class="main-banner-text"> 라벨5 이미지 입니다.</div>
+                    </div>
+                    <label for="banner-selet5">
+                        <div>라벨5</div>
+                    </label>
+                </div>
+
+            </div>
+        </div><!--main-content end-->
+
+        <div id="main-banner" class="bg-color-dark">
+            <div class="content-box flex">
+                <div id="main-banner1"><!--업데이트 정보센터-->
+                    <div class="update-icon"></div>
+                    <div class="ovfont update-text">
+                        <a href="">
+                            <div class="update-text1">업데이트 정보센터</div>
+                            <div class="update-text2">2022.12.22 / ver.1.2.372 업데이트 미리보기</div>
+                        </a>
+
+                    </div>
+                </div>
+                <div id="main-banner2"><!--게임시작 버튼-->
+                    <div class="ovfont">Game Start</div>
+                    <div class="play-hover-background"></div>
+                </div>
+                <div id="main-banner3"><!--로그인/회원가입-->
+                    <div class="login-top">
+                        <div class="blizzard-login">
+                            <a href="">블리자드 로그인</a>
+                        </div>
+                        <div class="steam-login">
+                            <a href="">스팀 로그인</a>
+                        </div>
+                    </div>
+                    <div class="login-center">
+                        <div class="qr-login">
+                            <a href="">qr 로그인</a>
+                        </div>
+                        <div class="others-login">
+                            <a href="">다른계정 간편 로그인</a>
+                        </div>
+                    </div>
+                    <div class="login-bottom">
+                        <a href="">회원가입</a> |
+                        <a href="">이메일ID전환</a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div><!--main-banner end-->
+
+        <div id="board">
+            <div class="content-box flex1">
+                <div class="content-box1 flex">
+                    <div id="board1">
+
+                    </div>
+                    <div id="board2">
+                        <div class="notice">
+                            <div class="main-notice">
+                                <div class="main-notice-symbol ovfont">공지</div>
+                                <a href="" class="ovfont notice-text">
+                                    <div>메인 공지 입니다.</div>
+                                    <div class="main-notice-content">메인 공지 내용입니다.</div>
+                                </a>
+
+                            </div>
+                            <div class="notice-others">
+                                <div class="notice-symbol ovfont ">공지</div>
+                                <a href="" class="ovfont notice-text">
+                                    <div>기타 공지 입니다.</div>
+                                </a>
+                            </div>
+                            <div class="notice-others">
+                                <div class="notice-symbol ovfont">공지</div>
+                                <a href="" class="ovfont notice-text">
+                                    <div>기타 공지 입니다.</div>
+                                </a>
+                            </div>
+                            <div class="notice-others">
+                                <div class="notice-symbol ovfont">공지</div>
+                                <a href="" class="ovfont notice-text">
+                                    <div>기타 공지 입니다.</div>
+                                </a>
+                            </div>
+                            <div class="notice-others-last">
+                                <div class="notice-symbol ovfont">공지</div>
+                                <a href="" class="ovfont notice-text">
+                                    <div>기타 공지 입니다.</div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="guide">
+                            <div class="guide-1"></div>
+                            <div class="guide-2"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-box2 flex">
+                    <div id="board3" class="ovfont">
+                        광고배너입니다.
+                    </div>
+                    <div id="board4" class="ovfont">
+                        <a href="">버그악용/불법 프로그램 신고</a>
+                        <a href="">프리미엄PC방 혜택 보기</a>
+                        <a href="">테스트서버 바로가기</a>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div><!--board end-->
+
+        <div id="footer" class="bg-color-dark">
+            <div class="footer-left">
+                <div class="footer-left-top ovfont">
+                    <div class="footertext"><a href="">회사소개</a></div>
+                    <div class="footertext"><a href="">채용안내</a></div>
+                    <div class="footertext"><a href="">이용약관</a></div>
+                    <div class="footertext"><a href="">게임이용등급안내</a></div>
+                    <div class="footertext"><a href="">개인정보처리방침</a></div>
+                    <div class="footertext"><a href="">청소년보호정책</a></div>
+                    <div class="footertext"><a href="">운영정책</a></div>
+                    <div class="footertext"><a href="">블리자드pc방</a></div>
+                    <div class="footertext lastborder"><a href="">사이트맵</a></div>
+
+                </div>
+                <div class="footer-left-center">
+                    <div class="footer-left-center-text1 ovfont">
+                        <div>블리자드 엔터테인먼트 유한 회사
+                        주소: 06164 서울시 강남구 테헤란로 521 파르나스타워 15층
+                        대표 번호: 1644-0727 | 팩스 번호: (02)544-3038 | 이메일: websupport@blizzard.co.kr</div>
+                        <div>사업자 등록 번호: 211-87-49910 | 통신 판매업 신고 번호: 강남-6017호 | 사업자정보확인
+                        대표이사: 다니엘 알레그레 | 개인정보 보호책임자: 이강호</div>
+                    </div>
+                    <div class="footer-left-center-text2 ovfont">
+                        ©2022 Blizzard Entertainment, Inc. 모든 권리는 Blizzard Entertainment에 있습니다.
+                        여기서 언급된 다른 모든 상표 는 각 소유권자들의 자산입니다.
+                    </div>
+                </div>
+                <div class="footer-left-bottom"></div>
+            </div>
+            <div class="footer-right">
+
+            </div>
+
+
+        </div><!--footer end-->
+
+
+    </div>
+
+
+
+</body>
+
+</html>

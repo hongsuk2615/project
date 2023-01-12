@@ -1,0 +1,187 @@
+#board{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-image: url("../sourcefiles/image/배경화면.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+#board>div{
+    padding-top: 40px;
+}
+@keyframes changebackground{
+    0%{
+        background-image: url("../sourcefiles/image/겐.png");
+    }25%{
+        background-image: url("../sourcefiles/image/트.png");
+    }50%{
+        background-image: url("../sourcefiles/image/위.png");
+    }75%{
+        background-image: url("../sourcefiles/image/한.png");
+    }
+}
+#board1{
+    width: 380px;
+    height: 320px;
+    background-image: url("../sourcefiles/image/겐.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    animation-name: changebackground;
+    animation-iteration-count: infinite;
+    animation-duration: 15s;
+}
+#board1:hover{
+    filter: brightness(120%);
+}
+
+
+#board2{
+    width: 806px;
+    height: 320px;
+    margin-left: 10px;
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+}
+
+.guide-1, .guide-2{
+    cursor: pointer;
+}
+.notice{
+    width: 507px;
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border-style: dotted;
+    border-top-color: white;
+    border-bottom-color: white;
+    border-left-color: white;
+    border-right-color: rgba(128, 128, 128, 0.568);
+    border-width: 1.2px;
+}
+.notice a{
+    width: 386px;
+    margin-left: 15px;
+}
+.notice>div{
+    border-bottom-color: rgba(128, 128, 128, 0.719);
+    border-top-color: white;
+    border-right-color: white;
+    border-left-color: white;
+    border-style: solid;
+    border-width: 1.2px;
+}
+
+.main-notice{
+    width: 449px;
+    height: 69px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.main-notice-symbol{
+    padding: 13px 13px;
+    width: 49px;
+    height: 49px;
+    border-radius: 50px;
+    background-color: #15171E;
+    color: white;
+    font-size: 15px;
+}
+.main-notice-content{
+    font-size: 15px;
+    color: #888888;
+}
+.notice-others{
+    width:449px;
+    height: 37px;
+    display: flex;
+    align-items: center;
+}
+.notice-symbol{
+    padding: 2px 13px;
+    width: 49px;
+    height: 24px;
+    border-radius: 116px;
+    background-color: #15171E;
+    color: white;
+    font-size: 15px;
+}
+.notice-text{
+    font-size: 17px;
+    color: #333333;
+}
+.notice-others-last{
+    width:449px;
+    height: 37px;
+    border-bottom-color: white;
+    display: flex;
+    align-items: center;
+}
+.guide{
+    width: 221px;
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.guide-1{
+    width: 221px;
+    height: 124px;
+    background-image: url("../sourcefiles/image/배너이미지.png");
+    background-position: center;
+    background-size: cover;
+}
+.guide-1:hover{
+    filter: brightness(110%);
+}
+.guide-2{
+    width: 221px;
+    height: 124px;
+    background-image: url("../sourcefiles/image/배너이미지2.jpg");
+    background-position: center;
+    background-size: cover;
+}
+.guide-2:hover{
+    filter: brightness(110%);
+}
+
+#board3{
+    width: 380px;
+    height: 74px;
+    background-image: url("../sourcefiles/image/광고배너.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: white;
+    font-size: 30px;
+}  
+#board3:hover{
+    filter: brightness(120%);
+} 
+#board4{
+    width: 806px;
+    height: 74px;
+    background-image: url("../sourcefiles/image/백그라운드용.webp");
+    display: flex;
+    justify-content: space-around;
+    
+    
+}
+#board4>a{
+    width: 33%;
+    padding: 27px 0px;
+    text-align: center;
+    color: white;
+}

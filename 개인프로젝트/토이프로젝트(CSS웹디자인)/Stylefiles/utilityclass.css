@@ -1,0 +1,45 @@
+@font-face {font-family: "Koverwatch";
+    src: url("../sourcefiles/fonts/Koverwatch/ Regular.ttf");
+    src: url("http://db.onlinewebfonts.com/t/1f00b50091b5a28cccf7b552ceefc8cd.eot"); /* IE9*/
+    src: url("http://db.onlinewebfonts.com/t/1f00b50091b5a28cccf7b552ceefc8cd.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("http://db.onlinewebfonts.com/t/1f00b50091b5a28cccf7b552ceefc8cd.woff2") format("woff2"), /* chrome firefox */
+    url("http://db.onlinewebfonts.com/t/1f00b50091b5a28cccf7b552ceefc8cd.woff") format("woff"), /* chrome firefox */
+    url("http://db.onlinewebfonts.com/t/1f00b50091b5a28cccf7b552ceefc8cd.ttf") format("truetype"), /* chrome firefox opera Safari, Android, iOS 4.2+*/
+    url("http://db.onlinewebfonts.com/t/1f00b50091b5a28cccf7b552ceefc8cd.svg#Koverwatch") format("svg"); /* iOS 4.1- */
+}/*오버워치 폰트*/
+.ovfont{
+    font-family: 'Koverwatch', 'Koverwatch';
+}
+.bg-color-dark{
+    background-color: #282d43;
+}
+.text-color-orange{
+    color: rgb(241, 116, 43);
+}
+.content-box{
+    height: 100%;
+    width: 1280px;
+    margin: auto;
+    padding: 0px 40px;
+}
+.content-box1{
+    width : 100%;
+    height : 320px;
+}
+.content-box2{
+    width: 100%;
+    height: 74px;
+    margin-top: 29px;
+}
+.flex{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.flex1{
+    flex-direction: column;
+    justify-content: space-between;
+}
+.pos-rel {
+    position: relative
+}

@@ -1,0 +1,261 @@
+#header>div {
+    height: 100%;
+
+}
+
+#header1 {
+    width: 107px;
+    height: 100%;
+    /* cursor: pointer; */
+}
+
+#header1>div {
+    height: 100%;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+}
+
+#header1>.ovfont:hover {
+    color: grey;
+}
+
+#header1>.ovfont {
+    position: relative;
+}
+
+#header1 input[type="radio"] {
+    appearance: none;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    visibility: hidden;
+}
+
+#header1>.ovfont>#side-menu-off {
+    width: 1700px;
+    height: 1508px;
+    background-color: rgba(0, 0, 0, 0.651);
+    position: absolute;
+    top: 0;
+    left: 400px;
+    z-index: -100;
+    visibility: hidden;
+    opacity: 0%;
+}
+
+#side-menu-off+label{
+    cursor: pointer;
+}
+.menu-background {
+    width: 400px;
+    height: 1345px;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    color: black;
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    opacity: 0%; 
+    z-index: -99;
+}
+.menu-label{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.side-menu-gamelist {
+    height: 1250px;
+    width: 100%;
+    /* border: 2px solid black; */
+}
+
+.gamelist-title {
+    height: 80px;
+    margin-top: 62px;
+    width: 100%;
+    /* border: 2px solid black; */
+    padding: 20px 65px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.totalgame {
+    width: 50px;
+    height: 22px;
+    border-bottom: 2px solid black;
+    font-size: 15px;
+}
+
+.clientcenter {
+    width: 80px;
+    height: 32px;
+    border: 2px solid gray;
+    font-size: 15px;
+    padding: 5px;
+}
+
+.clientcenter>a {
+    color: gray;
+}
+
+.gamelist-content {
+    height: 1108px;
+    width: 100%;
+    padding: 8px 65px;
+    /* border: 2px solid rgb(47, 34, 230); */
+    display: flex;
+}
+.gamelist{
+    width: 50%;
+    height: 100%;
+    padding-left: 4px;
+    /* border: 2px solid black; */
+}
+.gamelist-alphabet{
+    width: 100%;
+    height: 35px;
+    text-align: left;
+    font-size: 18px;
+    font-weight: bolder;
+}
+.gamelist-name{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.gamelist-name>a{
+    margin-bottom: 5px;
+    color: grey;
+}
+.gamelist>div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+
+.side-menu-servicelist {
+    height: 145px;
+    width: 100%;
+    /* border: 2px solid rgb(168, 40, 40); */
+    background-color: rgb(40, 45, 67);
+    position: sticky;
+    bottom: 50px;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.side-menu-servicelist>div{
+    width: 100px;
+    height: 35px;
+    /* border: 2px solid black;    */
+}
+.side-menu-servicelist>div>a{
+    color: white;
+    font-size: 13px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.side-menu-servicelist>div>a:hover{
+    color : #148eff;
+}
+
+.side-menu-totalservice {
+    height: 50px;
+    width: 100%;
+    /* border: 2px solid black; */
+    background-color: #17191d;
+    position: sticky;
+    bottom: 0;
+  
+}
+.side-menu-totalservice>a{
+    color: white;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.side-menu-totalservice:hover{
+    background-color: #0074e0;
+    transition: 0.5s;
+}
+
+#header1>.ovfont>#side-menu-on:checked+.menu-background {
+    z-index: 99;
+    visibility: visible;
+    transition-duration: 1s;
+    opacity: 100%;
+}
+
+#header1>.ovfont>#side-menu-on:checked+.menu-background+#side-menu-off {
+    z-index: 99;
+    visibility: visible;
+    transition-duration: 1s;
+    opacity: 100%;
+}
+
+
+
+#header2 {
+    width: 200px;
+    background-image: url("../sourcefiles/image/blizzardLogo.webp");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    padding: 0px 20px;
+    margin-left: 30px;
+    cursor: pointer;
+}
+
+#header2:hover {
+    filter: brightness(130%);
+}
+
+#header3 {
+    width: 241.64px;
+    padding: 18px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.make-id-box {
+    margin-top: 5px;
+    font-size: 14px;
+    color: white;
+}
+
+.make-id-box:hover {
+    color: grey;
+}
+
+.login-box {
+    font-size: 16px;
+    color: white;
+    width: 105px;
+    height: 23px;
+    padding-top: 2px;
+    text-align: center;
+    border: 1px solid;
+    border-color: white;
+    border-radius: 30px;
+}
+
+.login-box:hover {
+    color: grey;
+    border-color: grey;
+}
