@@ -24,4 +24,4 @@
 <h3>4. 파이널프로젝트(SPRING FRAMEWORK를 통한 기능구현)</h3>
 [2023.05.15~2023.06.20]<br>
 6인 1조로 스프링프레임워크를 사용한 파이널프로젝트 입니다.<br>
-<a href="https://github.com/hongsuk2615/Final_Project)https://github.com/hongsuk2615/Final_Project"> 파이널프로젝트 깃허브</a>
+<a href="https://github.com/hongsuk2615/Final_Project"> 파이널프로젝트 깃허브</a>
