@@ -14,3 +14,14 @@
 서버를 배우기전 프로젝트라 db대용으로 상품객체를 담은 객체배열을 사용해서 상품을 정렬, 필터링하도록 구성하였습니다.<br>
 동적요소만들기, 객체의 메서드, 반복되어 사용되는 코드를 함수로 만들어 유지보수나 코드 가독성을 높이려 했습니다.<br>
 <a href="https://www.notion.so/hongdolscoding/HTML-CSS-Javascript-1-4-d72a2b6eed214b46b7e4279cfcd0f5c3"> 발표자료(노션링크)</a>
+
+
+<h3>3. 세미프로젝트(JSP 서블릿을 통한 기능구현)</h3>
+[2023.03.28~2023.04.24]<br>
+6인 1조로 에브리타임을 참고하여 CRUD / 동기,비동기요청을 숙달하였습니다.<br>
+
+
+<h3>4. 파이널프로젝트(SPRING FRAMEWORK를 통한 기능구현)</h3>
+[2023.05.15~2023.06.20]<br>
+6인 1조로 스프링프레임워크를 사용한 파이널프로젝트 입니다.<br>
+<a href="https://github.com/hongsuk2615/Final_Project)https://github.com/hongsuk2615/Final_Project"> 파이널프로젝트 깃허브</a>
