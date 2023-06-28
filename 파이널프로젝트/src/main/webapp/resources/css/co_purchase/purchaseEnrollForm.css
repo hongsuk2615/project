@@ -1,0 +1,284 @@
+#cat_title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+#cat_title_1{
+    font-weight: 500;
+    font-size: 3em;
+}
+
+#submit_button{
+    height: 40px;
+    width: 80px;
+    font-size: 18px;
+    color: white;
+    background-color: rgb(20, 120, 220);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#enroll_title{
+    width: 80%;
+    border: none;
+}
+#enroll_title:focus, .info_content:focus{
+    outline: none;
+}
+
+.write_case{
+    display: flex;
+    align-items: center;
+    border: 1px solid #999999;
+    border-radius: 5px;
+}
+
+.write_case_head{
+    border-right: 1px solid #999999;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 5px 10px 5px 0;
+    width: 93px;
+    text-align: center;
+}
+
+#isend{
+	border-right: 1px solid #999999;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 5px 10px 5px 0;
+    text-align: center;
+}
+
+#check_box{
+	width: 30px;
+	height: 30px;
+	display: flex;
+    align-items: center;
+    padding-left: 10px;
+    cursor: pointer;
+}
+
+#fileUpload, #title_main{
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#fildUpload_border{
+    border: 1px solid #999999;
+    border-radius: 5px;
+}
+
+#fileUpload_0{
+    width: 64%;
+    margin-right: 8px;
+}
+
+#write_title{
+	height: 37px;
+    width: 100%;
+    margin-right: 8px;
+}
+
+#invite_info{
+    width: 100%;
+    display: flex;
+}
+
+.invite_info_1{
+    width: 292px;
+    margin-right: 8px;
+}
+
+.info_content{
+    border: none;
+}
+
+#fileUpload_1{
+    line-height: 62px;
+}
+
+#fileUpload_2{
+    width: 315px;
+}
+
+#fileUpload_2>input{
+    margin: 2px 0px 2px 0px;
+}
+
+.upload-name {
+    display: inline-block;
+    width: 455px;
+    height: 30px;
+    margin: 4px 0 8px 0;
+    padding-left: 10px;
+    vertical-align: middle;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    color: #6d6d6d;
+}
+
+{
+    outline: none;
+}
+
+.filebox>label {
+    display: inline-block;
+    color: #fff;
+    vertical-align: middle;
+    background-color: rgb(20, 120, 220);
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+    height: auto;
+    padding: 4px;
+    margin: 8px 0 4px 0;
+}
+
+.filebox>input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+
+#title_link{
+	margin-right: 8px;
+	margin-bottom: 10px;
+}
+
+#enroll_link{
+	border: none;
+    width: 85%;
+}
+
+.write_content{
+    width: 100%;
+    height: 30px;
+    padding-left: 15px;
+    border-radius: 5px;
+    border-width: 1px;
+    border: none;
+}
+.write_content:focus, .upload-name:focus, #enroll_link:focus{
+    outline: none;
+}
+
+textarea{
+    width: 915px;
+    height: 400px;
+    padding-top: 20px;
+    padding-left: 20px;
+    border-radius: 5px;
+    resize: none;
+}
+
+textarea:focus{
+    outline: none;
+}
+
+
+select{
+    width: 100px;
+    height: 35px;
+    background-size: 20px;
+    padding: 5px 30px 5px 10px;
+    border-radius: 4px;
+    outline: 0 none;
+    background: url("/thrifty/resources/images/main/icon/arrow-down.png") calc(100% - 5px) center no-repeat;
+    background-size: 10px;
+    -o-appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+select option{
+    background-color: black;
+    color: white;
+    height: 100px;
+}
+
+.selectBox2 * { box-sizing: border-box; }
+.selectBox2 {
+  position: relative;
+  width: 210px;
+  height: 35px;
+  border-radius: 4px;
+  /* border: 1px solid #dddddd; */
+  /* background: url("/thrifty/resources/images/main/icon/arrow-down.png") calc(100% - 7px) center no-repeat; */
+  background-size: 10px;
+  background-position: 93px;
+  cursor: pointer;
+}
+
+.selectBox2:after {
+  content: '';
+  display: block; 
+  width: 2px;
+  height: 100%; 
+  position: absolute; 
+  top: 0; 
+  right: 35px;
+  /* background: #dddddd; */
+}
+
+.selectBox2 .label {
+  display: flex;
+  align-items: center;
+  width: inherit;
+  height: inherit;
+  border: 0 none;
+  outline: 0 none;
+  padding-left: 15px;
+  background: transparent;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.selectBox2 .optionList {
+  position: absolute; 
+  top: 29.5px;
+  left: 0;
+  width: 100%;
+  background: rgb(255, 255, 255);
+  color: #000000;
+  border: 1px solid #dddddd;
+  list-style-type: none;
+  padding: 0;
+  border-radius: 6px;
+  overflow: hidden;
+  max-height: 0;
+  transition: .3s ease-in;
+}
+
+.selectBox2.active .optionList {
+  max-height: 500px;
+}
+
+.selectBox2 .optionItem {
+  border-bottom: 1px dashed rgb(218, 218, 218);
+  padding: 5px 15px 5px;
+  transition: .1s;
+  font-size: 14px;
+}
+
+.selectBox2 .optionItem:hover {
+  background: #ffffff;
+}
+
+.selectBox2 .optionItem:last-child {
+  border-bottom: 0 none;
+}
+
+// 스크롤 커스텀
+.selectBox2 .optionList::-webkit-scrollbar {width: 6px;}
+.selectBox2 .optionList::-webkit-scrollbar-track {background: transparent; }
+.selectBox2 .optionList::-webkit-scrollbar-thumb {background: #303030; border-radius: 45px;}
+.selectBox2 .optionList::-webkit-scrollbar-thumb:hover {background: #303030;}

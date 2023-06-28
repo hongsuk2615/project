@@ -1,0 +1,119 @@
+
+#body-right> table{
+    width: 100%;
+    margin: 10px;
+   
+}
+
+#body-right th, #body-right td{
+    width: 155px;
+    height: 63px;
+}
+
+#body-right th{
+    width: 310px;
+}
+#body-right h1{
+    display: inline-block;
+    text-align: left;
+    margin: 0px 10px;
+}
+#body-right input[type='text'], #body-right select, #body-right textarea, #body-right input[type='number']{
+    width: 100%;
+    height: 80%;
+    border: 1px solid gray;
+    border-radius: 8px;
+    resize: none;
+    padding: 0px 20px;
+    margin: 20px 0px;
+}
+#body-right input[type='number']{
+    width: 25%;
+}
+#body-right textarea{
+    padding : 20px;
+}
+#categoryAndLocation select{
+    text-align: center;
+}
+#trade-method>td{
+    padding: 20px;
+}
+#images>td{
+    height: 200px;
+    background-color: grey;
+    border-radius: 5px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+#content>td{
+    height: 380px;
+    padding-top : 20px;
+
+}
+#content textarea{
+    padding: 10px;
+    height: 100%;
+}
+
+#buttons{
+    margin: 10px 0px;
+    display: flex;
+    justify-content: right;
+}
+
+
+#insertImg-btn{
+    background-color: rgb(52, 152, 219);
+    color: white;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    line-height: 1.7;
+    cursor: pointer;
+}
+#insertImg-btn:hover{
+    background-color: rgb(44, 118, 168);
+}
+
+#cancel-btn{
+    background-color: rgb(94, 94, 94);
+    display: inline-block;
+    margin-left: 20px;
+    width: 70px;
+    border: 1px solid transparent;
+    height: 28px;
+    color: white;
+    border-radius: 4px;
+    text-align: center;
+    padding: 3px;
+    line-height: 1.7;
+    cursor: pointer;
+}
+#complete-btn{
+    background-color: rgb(52, 152, 219);
+    display: inline-block;
+    margin-left: 20px;
+    width: 70px;
+    height: 28px;
+    color: white;
+    border-radius: 4px;
+    text-align: center;
+    padding: 3px;
+    line-height: 1.7;
+    cursor: pointer;
+    margin-right: 30px;
+    border: 1px solid transparent;
+}
+#complete-btn:hover{
+    background-color: rgb(44, 118, 168);;
+}
+#cancel-btn:hover{
+    background-color: rgb(47, 46, 46);
+}
+
+.slick-prev:before, .slick-next:before{
+    color:black;
+}
+.slick-dots{
+    position : -35px;
+}

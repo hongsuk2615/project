@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="adminMapper">
+	<resultMap type="member" id="memberResultSet">
+		<id column="USER_NO" property="userNo"/>
+		<result column="USER_NAME" property="userName"/>
+		<result column="NICK_NAME" property="nickName"/>
+		<result column="GENDER" property="gender"/>
+		<result column="USER_ID" property="userId"/>
+		<result column="USER_PWD" property="userPwd"/>
+		<result column="PHONE" property="phone"/>
+		<result column="PWD_UPDATE_DATE" property="pwdUpdateDate"/>
+		<result column="IS_BANNED" property="isBanned"/>
+		<result column="REPORT_COUNT" property="reportCount"/>
+		<result column="CURRENT_LOGIN" property="currentLogin"/>
+		<result column="JOIN_DATE" property="joinDate"/>
+	</resultMap>
+	
+	<resultMap type="notice" id="noticeResultSet">
+		<id column="BOARD_NO" property="boardNo"/>
+		<result column="CATEGORY_S_NO"  property="categorySNo"/>
+		<result column="CONTENT"  property="content"/>
+		<result column="CREATE_DATE"  property="createDate"/>
+		<result column="READ_COUNT"  property="readCount"/>
+		<result column="REPORT_COUNT"  property="reportCount"/>
+		<result column="TITLE"  property="title"/>
+		<result column="USER_NO"  property="userNo"/>
+		<result column="WISH_COUNT"  property="wishCount"/>
+		<result column="STATUS" property="status"/>
+		<result column="CATEGORY_U_NAME" property="upperCategoryName"/>
+		<result column="CATEGORY_S_NAME" property="subCategoryName"/>
+		<association property="member" resultMap="memberResultSet"/>
+		<association property="upperCategory" resultMap="upperCategoryResultSet"/>
+		<association property="subCategory" resultMap="subCategoryResultSet"/>
+	</resultMap>
+	
+	<resultMap type="upperCategory" id="upperCategoryResultSet">
+		<id column="CATEGORY_U_NO" property="categoryUNo"/>
+		<result column="CATEGORY_U_NAME" property="categoryUName"/>
+		<result column="CATEGORY_PATH" property="categoryPath"/>
+	</resultMap>
+	
+	<resultMap type="subCategory" id="subCategoryResultSet">
+		<id column="CATEGORY_S_NO" property="categorySNo"/>
+		<result column="CATEGORY_U_NO" property="categoryUNo"/>
+		<result column="CATEGORY_S_NAME" property="categorySName"/>
+	</resultMap>
+
+	<resultMap type="board" id="boardResultSet">
+		<id column="BOARD_NO" property="boardNo"/>
+		<result column="CATEGORY_S_NO"  property="categorySNo"/>
+		<result column="CONTENT"  property="content"/>
+		<result column="CREATE_DATE"  property="createDate"/>
+		<result column="READ_COUNT"  property="readCount"/>
+		<result column="REPORT_COUNT"  property="reportCount"/>
+		<result column="TITLE"  property="title"/>
+		<result column="USER_NO"  property="userNo"/>
+		<result column="WISH_COUNT"  property="wishCount"/>
+		<result column="CATEGORY_U_NO"  property="categoryUNo"/>
+		<result column="NICK_NAME" property="nickName"/>
+		<result column="CATEGORY_U_NAME" property="upperCategoryName"/>
+		<result column="STATUS" property="status"/>
+		<result column="CATEGORY_PATH" property="categoryPath"/>
+	</resultMap>
+	
+	<resultMap type="reply" id="replyResultSet">
+		<id column="REPLY_NO" property="replyNo"/>
+		<result column="REF_BNO" property="refBno"/>
+		<result column="CONTENT" property="content"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="STATE" property="state"/>
+		<result column="PARENT_REPLY_NO" property="parentReplyNo"/>
+		<result column="REPORT_COUNT" property="reportCount"/>
+	</resultMap>
+	
+	<resultMap type="report" id="reportResultSet">
+		<result column="BOARD_NO" property="boardNo"/>
+		<result column="REPLY_NO" property="replyNo"/>
+		<result column="R_CATEGORY_NO" property="rcategoryNo"/>
+		<result column="REPORT_USER_NO" property="reportUserNo"/>
+		<association property="board" resultMap="boardResultSet"/>
+		<association property="member" resultMap="memberResultSet"/>
+		<association property="upperCategory" resultMap="upperCategoryResultSet"/>
+		<association property="reply" resultMap="replyResultSet" />
+	</resultMap>
+
+	<select id="loginAdmin" parameterType="member" resultMap="memberResultSet">
+		SELECT * 
+		FROM MEMBER
+		WHERE USER_ID = #{userId}
+		  AND AUTHORITY = 0
+		  AND STATUS = 'Y'
+	</select>
+	
+	<select id="selectMemberListCount" resultType="int" parameterType="map">
+		SELECT COUNT(*) FROM MEMBER
+		WHERE AUTHORITY = 1
+		<choose>
+			<when test="tab == 'active'">
+				AND STATUS = 'Y'
+				AND IS_BANNED = 'N'
+			</when>
+			<when test="tab == 'suspend'">
+				AND STATUS = 'N'
+				AND IS_BANNED = 'N'
+			</when>
+			<when test="tab == 'banned'">
+				AND IS_BANNED = 'Y'
+			</when>
+		</choose>
+		 <if test="search != null">
+		 	<bind name="searchPattern" value="'%'+search+'%'"/>
+		 	AND USER_ID LIKE #{searchPattern}
+		 	OR NICK_NAME LIKE #{searchPattern}
+		 </if>
+	</select>
+	
+	<select id="memberList" resultMap="memberResultSet" parameterType="map">
+		SELECT * 
+		FROM MEMBER
+		WHERE AUTHORITY = 1
+		<choose>
+			<when test="tab == 'active'">
+				AND STATUS = 'Y'
+				AND IS_BANNED = 'N'
+			</when>
+			<when test="tab == 'suspend'">
+				AND STATUS = 'N'
+				AND IS_BANNED = 'N'
+			</when>
+			<when test="tab == 'banned'">
+				AND IS_BANNED = 'Y'
+			</when>
+		</choose>
+		 <if test="search != null">
+		 	<bind name="searchPattern" value="'%'+search+'%'"/>
+		 	AND USER_ID LIKE #{searchPattern}
+		 	OR NICK_NAME LIKE #{searchPattern}
+		 </if>
+		ORDER BY CURRENT_LOGIN DESC,STATUS DESC, IS_BANNED ASC
+	</select>
+	
+	<select id="selectInfoBox" resultType="hashmap">
+		SELECT COUNT(*) as 'all', 
+	       (SELECT COUNT(*) FROM MEMBER WHERE CURRENT_LOGIN = 'Y' AND AUTHORITY = '1') as 'current',
+	       (SELECT COUNT(*) FROM MEMBER WHERE IS_BANNED = 'Y' AND AUTHORITY = '1') as 'ban',
+	       (SELECT COUNT(*) FROM MEMBER WHERE STATUS = 'N' AND AUTHORITY = '1') as 'suspend'
+		FROM MEMBER
+		WHERE AUTHORITY = '1'
+	</select>
+	
+	<update id="memberStatusUpdate" parameterType="map">
+		UPDATE MEMBER SET
+		<choose>
+			<when test="statusVal == 'active'">
+				STATUS = 'Y',
+				IS_BANNED = 'N'
+			</when>
+			<when test="statusVal == 'suspend'">
+				STATUS = 'N',
+				IS_BANNED = 'N'
+			</when>
+			<when test="statusVal == 'banned'">
+				IS_BANNED = 'Y'
+			</when>
+		</choose>
+		WHERE USER_NO = #{priNo}
+	</update>
+	
+	<update id="boardStatusUpdate" parameterType="map">
+		<choose>
+			<when test="type == 'reply'">
+				UPDATE REPLY SET	
+			</when>
+			<otherwise>
+				UPDATE BOARD SET
+			</otherwise>
+		</choose>
+		<choose>
+			<when test='statusVal == "Y" and type == "reply"'>
+				STATE = 'Y'
+			</when>
+			<when test='statusVal == "N" and type == "reply"'>
+				STATE = 'N'
+			</when>
+			<when test='statusVal == "Y" and type == null'>
+				STATUS = 'Y'
+			</when>
+			<when test='statusVal == "N" and type == null'>
+				STATUS = 'N'
+			</when>
+		</choose>
+		<choose>
+			<when test="type == 'reply'">
+				WHERE REPLY_NO = #{priNo}	
+			</when>
+			<otherwise>
+				WHERE BOARD_NO = #{priNo}
+			</otherwise>
+		</choose>
+		
+	</update>
+	
+	<select id="noticeSubCatList" resultMap="subCategoryResultSet">
+		SELECT *
+		FROM SUB_CATEGORY
+		WHERE CATEGORY_U_NO = 1
+	</select>
+		
+	<select id="faqSubCatList" resultMap="subCategoryResultSet">
+		SELECT *
+		FROM SUB_CATEGORY
+		WHERE CATEGORY_U_NO = 9
+	</select>
+	
+	<select id="selectReportListCount" resultType="int">
+		SELECT COUNT(*)
+		<if test="type == 'board'">
+			FROM REPORT R JOIN BOARD B USING(BOARD_NO)
+			JOIN MEMBER M USING(USER_NO)
+			JOIN UPPER_CATEGORY UC USING (CATEGORY_U_NO)
+		</if>
+		<if test="type == 'reply'">
+			FROM REPORT R JOIN REPLY RE USING(REPLY_NO)
+			JOIN BOARD B ON RE.REF_BNO = B.BOARD_NO
+			JOIN MEMBER M ON R.REPORT_USER_NO = M.USER_NO
+			JOIN UPPER_CATEGORY UC USING(CATEGORY_U_NO)
+		</if>
+			WHERE B.REPORT_COUNT > 0
+		<if test="catUNo != 0">
+			AND B.CATEGORY_U_NO = #{catUNo}
+		</if>
+	 	<if test="search != null">
+		 	<bind name="searchPattern" value="'%'+search+'%'"/>
+		 	AND B.TITLE LIKE #{searchPattern}
+		</if>
+	</select>
+	
+	<select id="selectBoardListCount" resultType="int">
+		SELECT COUNT(*)
+		FROM BOARD B
+		JOIN UPPER_CATEGORY UC USING(CATEGORY_U_NO)
+		WHERE CATEGORY_U_NO NOT IN(1, 9)
+		<if test="catUNo != 0">
+			AND B.CATEGORY_U_NO = #{catUNo}
+		</if>
+	 	<if test="search != null">
+		 	<bind name="searchPattern" value="'%'+search+'%'"/>
+		 	AND B.TITLE LIKE #{searchPattern}
+		</if>
+	</select>
+	
+	<select id="selectNoticeListCount" resultType="int">
+		SELECT COUNT(*)
+		FROM BOARD B
+        JOIN SUB_CATEGORY SC ON B.CATEGORY_S_NO = SC.CATEGORY_S_NO
+		WHERE  B.CATEGORY_U_NO = 1
+		<if test="catSNo != 0">
+			AND SC.CATEGORY_S_NO = #{catSNo}
+		</if>
+	 	<if test="search != null">
+		 	<bind name="searchPattern" value="'%'+search+'%'"/>
+		 	AND B.TITLE LIKE #{searchPattern}
+		</if>
+	</select>
+	
+	<select id="selectFaqListCount" parameterType="map" resultType="int">
+		SELECT COUNT(*)
+		FROM BOARD B
+        JOIN SUB_CATEGORY SC ON B.CATEGORY_S_NO = SC.CATEGORY_S_NO
+		WHERE  B.CATEGORY_U_NO = 9
+		<if test="catSNo != 0">
+			AND SC.CATEGORY_S_NO = #{catSNo}
+		</if>
+	 	<if test="search != null">
+		 	<bind name="searchPattern" value="'%'+search+'%'"/>
+		 	AND B.TITLE LIKE #{searchPattern}
+		</if>
+	</select>
+	
+	<select id="reportList" parameterType="map" resultMap="reportResultSet">
+		<if test="type == 'board'">
+			SELECT BOARD_NO, CATEGORY_U_NAME, TITLE, B.REPORT_COUNT, NICK_NAME, B.STATUS, CATEGORY_PATH
+			FROM REPORT R JOIN BOARD B USING(BOARD_NO)
+			JOIN MEMBER M USING(USER_NO)
+			JOIN UPPER_CATEGORY UC USING (CATEGORY_U_NO)
+		</if>
+		<if test="type == 'reply'">
+			SELECT RE.REPLY_NO, REF_BNO AS BOARD_NO, UC.CATEGORY_U_NAME, B.TITLE, RE.CONTENT, RE.REPORT_COUNT, M.NICK_NAME, RE.STATE, CATEGORY_PATH
+			FROM REPORT R JOIN REPLY RE USING(REPLY_NO)
+			JOIN BOARD B ON RE.REF_BNO = B.BOARD_NO
+			JOIN MEMBER M ON R.REPORT_USER_NO = M.USER_NO
+			JOIN UPPER_CATEGORY UC USING(CATEGORY_U_NO)
+		</if>
+			WHERE B.REPORT_COUNT > 0
+		<if test="catUNo != 0">
+			AND B.CATEGORY_U_NO = #{catUNo}
+		</if>
+	 	<if test="search != null">
+		 	<bind name="searchPattern" value="'%'+search+'%'"/>
+		 	AND B.TITLE LIKE #{searchPattern}
+		</if>
+		<if test="type == 'board'">
+			ORDER BY B.STATUS DESC, B.REPORT_COUNT DESC
+		</if>
+		<if test="type == 'reply'">
+			ORDER BY RE.STATE DESC, RE.REPORT_COUNT DESC 
+		</if>
+	</select>
+	
+	<select id="boardList" resultMap="boardResultSet">
+		SELECT *
+		FROM BOARD B
+		JOIN UPPER_CATEGORY UC USING(CATEGORY_U_NO)
+		JOIN MEMBER M USING(USER_NO)
+		WHERE CATEGORY_U_NO NOT IN(1, 9)
+		<if test="catUNo != 0">
+			AND B.CATEGORY_U_NO = #{catUNo}
+		</if>
+	 	<if test="search != null">
+		 	<bind name="searchPattern" value="'%'+search+'%'"/>
+		 	AND B.TITLE LIKE #{searchPattern}
+		</if>
+		ORDER BY B.STATUS DESC, B.CREATE_DATE DESC
+	</select>
+	
+	<select id="noticeList" resultMap="noticeResultSet" parameterType="map">
+		SELECT B.BOARD_NO, SC.CATEGORY_S_NAME, B.TITLE, M.NICK_NAME, B.CREATE_DATE, B.READ_COUNT, B.STATUS
+		FROM BOARD B
+		JOIN MEMBER M ON B.USER_NO = M.USER_NO
+		JOIN UPPER_CATEGORY UC ON B.CATEGORY_U_NO = UC.CATEGORY_U_NO
+		JOIN SUB_CATEGORY SC ON B.CATEGORY_S_NO = SC.CATEGORY_S_NO
+		WHERE B.CATEGORY_U_NO = 1
+		<if test="catSNo != 0">
+			AND B.CATEGORY_S_NO = #{catSNo}
+		</if>
+		<if test="search != null">
+		 	<bind name="searchPattern" value="'%'+search+'%'"/>
+		 	AND B.TITLE LIKE #{searchPattern}
+		</if>
+		ORDER BY B.CREATE_DATE DESC
+	</select>
+	
+	<select id="faqList" resultMap="noticeResultSet" parameterType="map">
+		SELECT B.BOARD_NO, SC.CATEGORY_S_NAME, B.TITLE, M.NICK_NAME, B.CREATE_DATE, B.READ_COUNT, B.STATUS
+		FROM BOARD B
+		JOIN MEMBER M ON B.USER_NO = M.USER_NO
+		JOIN UPPER_CATEGORY UC ON B.CATEGORY_U_NO = UC.CATEGORY_U_NO
+		JOIN SUB_CATEGORY SC ON B.CATEGORY_S_NO = SC.CATEGORY_S_NO
+		WHERE B.CATEGORY_U_NO = 9
+		<if test="catSNo != 0">
+			AND B.CATEGORY_S_NO = #{catSNo}
+		</if>
+		<if test="search != null">
+		 	<bind name="searchPattern" value="'%'+search+'%'"/>
+		 	AND B.TITLE LIKE #{searchPattern}
+		</if>
+		ORDER BY B.CREATE_DATE DESC
+	</select>
+
+	<insert id="enrollInsert" parameterType="board">
+		INSERT INTO BOARD(CATEGORY_U_NO, CATEGORY_S_NO, TITLE, CONTENT, USER_NO)
+		VALUES(#{categoryUNo}, #{categorySNo}, #{title}, #{content}, #{userNo});
+	</insert>
+	
+	<update id="enrollUpdate" parameterType="board">
+		UPDATE BOARD
+		SET CATEGORY_S_NO = #{categorySNo},
+			TITLE = #{title},
+			CONTENT = #{content},
+			USER_NO = #{userNo}
+		WHERE BOARD_NO = #{boardNo}
+	</update>
+	
+	<select id="upperCatList" resultMap="upperCategoryResultSet">
+		SELECT *
+		FROM UPPER_CATEGORY
+		WHERE CATEGORY_U_NO != 9
+	</select>
+	
+	<select id="subCatList" resultMap="subCategoryResultSet">
+		SELECT *
+		FROM SUB_CATEGORY
+		WHERE CATEGORY_U_NO = #{catUNo}
+	</select>
+	
+	<select id="enrollSelect" resultMap="boardResultSet">
+		SELECT *
+		FROM BOARD
+		WHERE BOARD_NO = #{boardNo}
+	</select>
+	
+	<select id="dailyUser" resultType="map">
+		SELECT DATE_FORMAT(TODAY, "%m/%d") AS today, TODAY_COUNT AS todayCount
+		FROM TODAY_LOGIN
+		WHERE DAY(TODAY) BETWEEN DAY(CURDATE())-7 AND DAY(CURDATE())-1;
+	</select>
+	
+	<select id="dailyBoard" resultType="map">
+		SELECT UC.CATEGORY_U_NAME AS category, IFNULL(B.INSERT_COUNT, 0) AS number
+		FROM UPPER_CATEGORY UC
+		LEFT JOIN (SELECT CATEGORY_U_NO, COUNT(CATEGORY_U_NO) AS INSERT_COUNT
+				   FROM BOARD
+                   WHERE CREATE_DATE = CURDATE()
+                   GROUP BY CATEGORY_U_NO) B 
+          ON UC.CATEGORY_U_NO = B.CATEGORY_U_NO
+        WHERE UC.CATEGORY_U_NO NOT IN(1,9)
+       	GROUP BY UC.CATEGORY_U_NAME;
+	</select>
+	
+	<insert id="todayLoginCount">
+		INSERT INTO TODAY_LOGIN
+			SELECT DATE_ADD(CURDATE(), INTERVAL -1 DAY) AS TODAY, COUNT(TODAY_LOGIN) AS TODAY_COUNT
+			FROM MEMBER
+			WHERE TODAY_LOGIN = 'Y';
+	</insert>
+	
+	<update id="todayLoginReset">
+		UPDATE MEMBER
+		SET TODAY_LOGIN = 'N'
+		WHERE CURRENT_LOGIN = 'N';
+	</update>
+	
+	<select id="reportCountDetail" parameterType="map" resultType="map">
+		SELECT RC.R_CATEGORY_NO as categoryNo, RC.R_CATEGORY_NAME as categoryName, IFNULL(R.COUNT, 0) AS count
+		FROM REPORT_CATEGORY RC
+		LEFT JOIN (SELECT R_CATEGORY_NO, R_CATEGORY_NAME, COUNT(R_CATEGORY_NO) AS COUNT
+		   FROM REPORT R
+		   JOIN REPORT_CATEGORY RC USING(R_CATEGORY_NO)
+		   <if test="bNo != null">
+		   	WHERE BOARD_NO = #{bNo}
+		   </if>
+		   <if test="rNo != null">
+		   	WHERE REPLY_NO = #{rNo}
+		   </if>
+		   GROUP BY R_CATEGORY_NO) R 
+  		ON RC.R_CATEGORY_NO = R.R_CATEGORY_NO;
+	</select>
+</mapper>

@@ -1,0 +1,35 @@
+#main_event a{
+    display: flex;
+    justify-content: center;
+}
+
+#main_event_img{
+    width: 95%;
+}
+
+#main_menu{
+    width: 900px;
+    padding-top: 80px;
+    display: grid;
+    margin: auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-column-gap: 10px;
+    grid-row-gap: 50px;
+    place-items: center;
+    text-align: center;
+}
+
+.main_menu_icon{
+    width: 100px;
+    height: 100px;
+}
+
+#main_menu a div{
+    color: black;
+    font-size: 18px;
+    color: rgba(0,0,0,0.56);
+    text-align: center;
+    padding-top: 10px;
+    font-weight: 900;
+    font-size: 24px;
+}

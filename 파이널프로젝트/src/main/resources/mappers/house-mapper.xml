@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="houseMapper">
+	<resultMap type="house" id="houseResultSet">
+		<id column="BOARD_NO" property="boardNo"/>
+		<result column="HOUSE_ADDRESS"  property="houseAddress"/>
+		<result column="HOUSE_LONGITUDE"  property="houseLongitude"/>
+		<result column="HOUSE_LATITUDE"  property="houseLatitude"/>
+		<result column="INFORMATION"  property="information"/>
+		<result column="THUMBNAIL"  property="thumbnail"/>
+		<result column="MIN_AMOUNT"  property="minAmount"/>
+		<result column="APPLY_COUNT"  property="applyCount"/>
+		<result column="WISH"  property="wish"/>
+			<collection property="roomList" javaType="java.util.ArrayList" ofType="room"
+			select="selectRoomList" column="BOARD_NO" />
+			<collection property="board" resultMap="boardResultSet"/>
+	</resultMap>
+	
+	<resultMap type="room" id="roomResultSet">
+		<id column="ROOM_NO" property="roomNo"/>
+		<result column="BOARD_NO" property="boardNo"/>
+		<result column="RECRUITS_NUM"  property="recruitsNum"/>
+		<result column="DIVISION"  property="division"/>
+		<result column="GENDER"  property="gender"/>
+		<result column="TYPE"  property="type"/>
+		<result column="AREA"  property="area"/>
+		<result column="DEPOSIT"  property="deposit"/>
+		<result column="RENT"  property="rent"/>
+		<result column="COST"  property="cost"/>
+		<result column="CONTRAT"  property="contrat"/>
+		<result column="SYMBOL"  property="symbol"/>
+		<collection property="imgList" javaType="java.util.ArrayList" ofType="roomImg"
+		select="selectImgList" column="ROOM_NO" />
+	</resultMap>
+	
+	<resultMap type="roomImg" id="roomImgResultSet">
+		<id column="IMG_NO" property="roomImgNo"/>
+		<result column="ROOM_NO" property="roomNo"/>
+		<result column="ORIGIN_NAME"  property="originName"/>
+		<result column="CHANGE_NAME"  property="changeName"/>
+		<result column="FILE_LEVEL"  property="imgLevel"/>
+		<result column="STATUS"  property="status"/>
+	</resultMap>
+	
+		<resultMap type="board" id="boardResultSet">
+		<id column="BOARD_NO" property="boardNo"/>
+		<result column="CATEGORY_S_NO"  property="categorySNo"/>
+		<result column="CONTENT"  property="content"/>
+		<result column="CREATE_DATE"  property="createDate"/>
+		<result column="READ_COUNT"  property="readCount"/>
+		<result column="REPORT_COUNT"  property="reportCount"/>
+		<result column="TITLE"  property="title"/>
+		<result column="USER_NO"  property="userNo"/>
+		<result column="WISH_COUNT"  property="wishCount"/>
+		<result column="NICK_NAME"  property="nickName"/>
+	</resultMap>
+	
+	<resultMap type="tour" id="tourResultSet">
+		<id column="ROOM_NO" property="roomNo"/>
+		<result column="USER_NO"  property="userNo"/>
+		<result column="MOVE_IN"  property="moveIn"/>
+		<result column="ENQUIRY"  property="enquiry"/>
+		<result column="TITLE"  property="title"/>
+		<result column="DIVISION"  property="roomName"/>
+	</resultMap>
+	
+	<insert id="insertHouse" parameterType="house">
+		INSERT INTO SHARE_HOUSE (BOARD_NO, HOUSE_ADDRESS, HOUSE_LATITUDE, HOUSE_LONGITUDE, INFORMATION, THUMBNAIL)
+		VALUES (#{boardNo}, #{houseAddress},  #{houseLatitude}, #{houseLongitude}, #{information}, #{thumbnail})
+	</insert>
+	
+	<insert id="insertRoom" useGeneratedKeys="true" parameterType="house" keyProperty="roomNo">
+		INSERT INTO ROOM (ROOM_NO, BOARD_NO, RECRUITS_NUM, DIVISION, GENDER, TYPE, AREA, DEPOSIT, RENT, COST, CONTRAT)
+		VALUES ( default , #{boardNo}, #{recruitsNum}, #{division}
+		, #{gender}, #{type}, #{area}, #{deposit}
+		, #{rent}, #{cost}, #{contrat})
+	</insert>
+	
+	<insert id="insertRoomImg" parameterType="java.util.ArrayList">
+	INSERT INTO ROOM_IMAGE ( ORIGIN_NAME, CHANGE_NAME, ROOM_NO, FILE_LEVEL)
+	SELECT C.* FROM 
+	(
+		<foreach collection="list" item="roomImgList" separator="UNION ALL">
+			SELECT 
+				#{roomImgList.originName} as ORIGIN_NAME,
+				#{roomImgList.changeName} as CHANGE_NAME,
+				#{roomImgList.roomNo} as ROOM_NO,
+				#{roomImgList.imgLevel} as FILE_LEVEL
+			FROM DUAL
+		</foreach>
+	) C
+</insert>
+
+	<select id="selectHouse" parameterType="_int" resultMap="houseResultSet">
+		SELECT *, (SELECT COUNT(*) FROM TOUR WHERE ROOM_NO IN ( SELECT ROOM_NO FROM ROOM WHERE BOARD_NO = #{boardNo}) AND STATUS = 'Y') AS APPLY_COUNT
+		FROM SHARE_HOUSE
+		WHERE BOARD_NO = #{boardNo}
+	</select>
+	
+	 
+	<select id="searchHouse"  resultMap="houseResultSet">
+		SELECT BOARD.BOARD_NO, USER_NO, TITLE, HOUSE_LATITUDE, HOUSE_LONGITUDE, THUMBNAIL,
+				(SELECT MIN(RENT)
+					FROM ROOM
+					WHERE BOARD_NO = BOARD.BOARD_NO
+				) MIN_AMOUNT,
+				(SELECT COUNT(*)
+					FROM WISH_LIST
+					WHERE BOARD_NO = BOARD.BOARD_NO
+						AND USER_NO = #{userNo}) WISH
+			FROM BOARD
+		    LEFT JOIN SHARE_HOUSE ON SHARE_HOUSE.BOARD_NO = BOARD.BOARD_NO
+		    WHERE CATEGORY_U_NO = '2'
+				AND STATUS = 'Y'
+				<choose>
+					<when test="C != null">
+						AND HOUSE_LATITUDE BETWEEN #{C.swLat} AND #{C.neLat}
+						AND HOUSE_LONGITUDE BETWEEN #{C.swLng} AND #{C.neLng}
+					</when>
+					<otherwise>
+						AND BOARD.TITLE LIKE #{keyword}
+					</otherwise>
+				</choose>
+			ORDER BY CREATE_DATE
+	</select>
+	
+	<select id="selectRoomList" resultMap="roomResultSet">
+	SELECT *
+	FROM ROOM
+	WHERE BOARD_NO = #{boardNo}
+		AND STATUS = 'Y'
+	</select> 
+	
+	<select id="selectImgList" resultMap="roomImgResultSet">
+	SELECT *
+	FROM ROOM_IMAGE
+	WHERE ROOM_NO = #{roomNo}
+		AND STATUS = 'Y'
+	ORDER BY FILE_LEVEL
+		
+	</select>
+	
+	<select id="selectHouseList" resultMap="houseResultSet">
+		SELECT BOARD.BOARD_NO, USER_NO, TITLE, HOUSE_LATITUDE, HOUSE_LONGITUDE, THUMBNAIL, HOUSE_ADDRESS,
+				(SELECT MIN(RENT)
+					FROM ROOM
+					WHERE BOARD_NO = BOARD.BOARD_NO
+				) MIN_AMOUNT,
+				(SELECT COUNT(*)
+					FROM WISH_LIST
+					WHERE BOARD_NO = BOARD.BOARD_NO
+						AND USER_NO = #{userNo}) WISH
+			FROM BOARD
+		    LEFT JOIN SHARE_HOUSE ON SHARE_HOUSE.BOARD_NO = BOARD.BOARD_NO
+		    WHERE CATEGORY_U_NO = '2'
+				AND STATUS = 'Y'
+			ORDER BY CREATE_DATE DESC
+	</select>
+	
+	<insert id="tourApply" parameterType="tour">
+		INSERT IGNORE INTO TOUR (ROOM_NO, USER_NO, MOVE_IN, ENQUIRY, STATUS)
+		VALUES (#{roomNo}, #{userNo},  #{moveIn}, #{enquiry}, default)
+	</insert>
+	
+	<update id="changeRecruitment"  parameterType="room" useGeneratedKeys="true" keyProperty="recruitsNum">
+		<choose>
+			<when test="symbol == 'plus'">
+				UPDATE ROOM
+				SET RECRUITS_NUM = RECRUITS_NUM + 1
+					WHERE ROOM_NO = #{roomNo}
+			</when>
+			<otherwise>
+				UPDATE ROOM
+				SET RECRUITS_NUM = RECRUITS_NUM - 1
+					WHERE ROOM_NO = #{roomNo}
+			</otherwise>
+		</choose>
+		
+	</update>
+	
+	<update id="updateHouse" parameterType="house">
+		UPDATE SHARE_HOUSE SET 
+			HOUSE_ADDRESS = #{houseAddress},
+			HOUSE_LATITUDE =  #{houseLatitude},
+			HOUSE_LONGITUDE =  #{houseLongitude},
+			THUMBNAIL = #{thumbnail},
+			INFORMATION =  #{information}
+		WHERE BOARD_NO = #{boardNo}
+	</update>
+	
+	<update id="deleteImage" parameterType="string">
+		UPDATE ROOM_IMAGE
+		   SET STATUS = 'N'
+		 WHERE IMG_NO IN ${deleteImgList}
+	</update>
+	
+	<update id="deleteRoom" parameterType="string">
+		UPDATE ROOM
+		   SET STATUS = 'N'
+		 WHERE ROOM_NO IN ${deleteRoomList}
+	</update>
+	
+	<update id="updateRoom">
+		UPDATE ROOM 
+			SET RECRUITS_NUM = #{recruitsNum},
+			DIVISION = #{division}, 
+			GENDER =  #{gender},
+			TYPE = #{type},
+			AREA = #{area},
+			DEPOSIT =  #{deposit},
+			RENT = #{rent},
+			COST = #{cost},
+			CONTRAT = #{contrat}
+		WHERE ROOM_NO = #{roomNo}
+	</update>
+	
+	<select id="ImageLevel" resultType="_int">
+		SELECT MAX(FILE_LEVEL)
+			FROM ROOM_IMAGE
+			WHERE ROOM_NO = #{roomNo}
+	</select>
+	
+	<select id="setThumbnail" resultType="string">
+		SELECT CHANGE_NAME
+			FROM ROOM_IMAGE
+			WHERE ROOM_NO = (
+				SELECT MIN(ROOM_NO) FROM ROOM WHERE BOARD_NO = #{boardNo} AND STATUS = 'Y')
+                AND STATUS = 'Y'
+                ORDER BY FILE_LEVEL
+                LIMIT 1
+	</select>
+	
+	<select id="checkApply" resultMap="tourResultSet">
+		SELECT *
+			FROM TOUR T
+			JOIN ROOM R USING (ROOM_NO)
+			JOIN BOARD S USING (BOARD_NO)
+			WHERE BOARD_NO = #{boardNo}
+			AND T.STATUS = 'Y';
+	</select>
+	
+	<update id="checkStatus" >
+		UPDATE TOUR
+		SET STATUS = 'N'
+			WHERE ROOM_NO = #{rNo}
+				AND USER_NO = #{uNo}
+	</update>
+	
+	<select id="selectApply" resultMap="tourResultSet">
+		SELECT *
+			FROM TOUR T
+			JOIN ROOM R USING (ROOM_NO)
+			JOIN BOARD S USING (BOARD_NO)
+			WHERE T.ROOM_NO = #{rNo}
+				AND T.USER_NO = #{uNo}
+	</select>
+	
+	<select id="houseAd" resultMap="houseResultSet">
+		SELECT *
+			FROM SHARE_HOUSE
+			JOIN BOARD B USING (BOARD_NO)
+			JOIN ROOM R USING (BOARD_NO)
+			WHERE B.STATUS = 'Y'
+				ORDER BY RAND()
+				LIMIT 1
+	</select>
+	
+	
+</mapper>

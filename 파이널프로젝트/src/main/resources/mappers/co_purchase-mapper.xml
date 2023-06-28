@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="co_purchaseMapper">
+
+	<resultMap type="co_purchase" id="coPurchaseListResultSet">
+		<id column="BOARD_NO" property="boardNo"/>
+		<result column="TITLE" property="title"/>
+		<result column="PRICE" property="price"/>
+		<result column="RECRUITS_NUM" property="recruitsNum"/>
+		<result column="RECRUITS_CURR" property="recruitsCurr"/>
+		<result column="PRICE" property="price"/>
+		<result column="DEAD_LINE" property="deadLine"/>
+		<result column="READ_COUNT"  property="readCount"/>
+		<result column="IS_END" property="isEnd"/>
+		<result column="THUMB_NAIL" property="thumbNail"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="PRODUCT_NAME" property="productName"/>
+		<result column="LINK" property="link"/>
+	</resultMap>
+	
+	<resultMap type="co_purchase" id="coPurchaseResultSet">
+		<id column="BOARD_NO" property="boardNo"/>
+		<result column="TITLE" property="title"/>
+		<result column="PRICE" property="price"/>
+		<result column="RECRUITS_NUM" property="recruitsNum"/>
+		<result column="RECRUITS_CURR" property="recruitsCurr"/>
+		<result column="PRICE" property="price"/>
+		<result column="DEAD_LINE" property="deadLine"/>
+		<result column="READ_COUNT"  property="readCount"/>
+		<result column="IS_END" property="isEnd"/>
+		<result column="THUMB_NAIL" property="thumbNail"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="PRODUCT_NAME" property="productName"/>
+		<result column="LINK" property="link"/>
+		<result column="NICK_NAME" property="nickName"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="CHANGE_NAME2" property="changeName2"/>
+		
+		<association property="board" column="BOARD_NO" javaType="com.ace.thrifty.board.model.vo.Board">
+			<id column="BOARD_NO" property="boardNo"/>			
+			<result column="CATEGORY_S_NO"  property="categorySNo"/>
+			<result column="CONTENT"  property="content"/>
+			<result column="CREATE_DATE"  property="createDate"/>
+			<result column="READ_COUNT"  property="readCount"/>
+			<result column="REPORT_COUNT"  property="reportCount"/>
+			<result column="TITLE"  property="title"/>
+			<result column="USER_NO"  property="userNo"/>
+			<result column="WISH_COUNT"  property="wishCount"/>
+		</association>
+		<association property="seller" column="BOARD_NO" javaType="com.ace.thrifty.member.model.vo.Member">
+			<id column="USED_NO" property="userNo"/>
+			<result column="NICK_NAME" property="nickName"/>
+			<result column="CHANGE_NAME" property="changeName"/>
+		</association>
+		<association  property="imageList" column="BOARD_NO" javaType="com.ace.thrifty.board.model.vo.Image">
+			<id column="IMG_NO" property="imgNo"/>
+			<result column="BOARD_NO" property="boardNo"/>
+			<result column="ORIGIN_NAME" property="originName"/>
+			<result column="CHANGE_NAME" property="changeName"/>
+			<result column="FILE_LEVEL" property="fileLevel"/>
+			<result column="STATUS" property="status"/>
+		</association>
+		<association property="subCategory" column="CATEGORY_S_NO" javaType="com.ace.thrifty.board.model.vo.SubCategory">
+			<id column="CATEGORY_S_NO" property="categorySNo"/>
+			<result column="CATEGORY_U_NO" property="categoryUNo"/>
+			<result column="CATEGORY_S_NAME" property="categorySName"/>
+		</association>
+	</resultMap>
+	
+	<select id="selectBoardListCount" parameterType="map" resultType="_int">
+		SELECT COUNT(*)
+		FROM BOARD B
+		JOIN CO_PURCHASE C USING(BOARD_NO)
+		JOIN MEMBER M USING(USER_NO)
+		JOIN IMAGE I USING(BOARD_NO)
+		WHERE B.STATUS = 'Y'
+		AND CATEGORY_U_NO = 6
+		<choose>
+	 		<when test='scNo!= null and scNo !=""'>
+	 			AND CATEGORY_S_NO = #{scNo}
+	 		</when>
+			<when test="condition == '작성자'">
+				AND NICK_NAME LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+			</when>
+			<when test="condition == '제목'">
+				AND TITLE LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+			</when>
+			<when test="condition == '내용'">
+				AND CONTENT LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+			</when>
+		</choose>
+	</select>
+	
+	<select id="selectCoPurchaseList" parameterType="map" resultMap="coPurchaseResultSet">
+		SELECT BOARD_NO
+			, RECRUITS_NUM
+			, RECRUITS_CURR
+			, PRICE
+			, DEAD_LINE
+			, IS_END
+			, TITLE
+			, CONTENT
+			, CREATE_DATE
+			, WISH_COUNT
+			, READ_COUNT
+			, NICK_NAME
+			, M.CHANGE_NAME
+			, CONCAT('/resources/upfiles/co_purchase/', I.CHANGE_NAME) AS THUMB_NAIL
+		FROM CO_PURCHASE
+		JOIN BOARD B USING(BOARD_NO)
+		JOIN MEMBER M USING(USER_NO)
+		JOIN IMAGE I USING(BOARD_NO)
+		WHERE B.STATUS = 'Y'
+			<if test= 'scNo!= null and scNo !="" '>
+		 		AND CATEGORY_S_NO = #{scNo}
+		 	</if>
+		GROUP BY BOARD_NO
+		ORDER BY BOARD_NO DESC
+	</select>
+	
+	<select id="selectSearchCoPurchaseList" parameterType="map" resultMap="coPurchaseResultSet">
+		SELECT BOARD_NO
+			, RECRUITS_NUM
+			, RECRUITS_CURR
+			, PRICE
+			, DEAD_LINE
+			, IS_END
+			, TITLE
+			, CONTENT
+			, CREATE_DATE
+			, WISH_COUNT
+			, READ_COUNT
+			, NICK_NAME
+			, M.CHANGE_NAME
+			, CONCAT('/resources/upfiles/co_purchase/', I.CHANGE_NAME) AS THUMB_NAIL
+		FROM CO_PURCHASE
+		JOIN BOARD B USING(BOARD_NO)
+		JOIN MEMBER M USING(USER_NO)
+		JOIN IMAGE I USING(BOARD_NO)
+		WHERE B.STATUS = 'Y'
+		 	<choose>
+		 		<when test='scNo!= null and scNo !=""'>
+		 			AND CATEGORY_S_NO = #{scNo}
+		 		</when>
+				<when test="condition == '작성자'">
+					AND NICK_NAME LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+				</when>
+				<when test="condition == '제목'">
+					AND TITLE LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+				</when>
+				<when test="condition == '내용'">
+					AND CONTENT LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+				</when>
+			</choose>
+		GROUP BY BOARD_NO
+		ORDER BY BOARD_NO DESC
+	</select>
+	
+	<insert id="insertCo_purchase" parameterType="co_purchase">
+		INSERT INTO CO_PURCHASE(BOARD_NO, RECRUITS_CURR, RECRUITS_NUM, PRICE, DEAD_LINE, PRODUCT_NAME, LINK)
+					VALUES (#{boardNo}, #{ recruitsCurr }, #{ recruitsNum }, #{ price }, #{ deadLine }, #{ productName }, #{ link })
+	</insert>
+	
+	<select id="selectBoardDetail" resultMap="coPurchaseResultSet">
+		SELECT USER_NO, CATEGORY_S_NO, BOARD_NO, RECRUITS_NUM, RECRUITS_CURR, PRICE, DEAD_LINE, IS_END, PRODUCT_NAME, LINK, TITLE, CONTENT, CREATE_DATE, M.REPORT_COUNT, WISH_COUNT, READ_COUNT, M.STATUS, SC.CATEGORY_U_NO, IMG_NO, I.ORIGIN_NAME, I.CHANGE_NAME, FILE_LEVEL, B.CATEGORY_U_NO, CATEGORY_S_NAME, USER_NAME, NICK_NAME, GENDER, USER_ID, USER_PWD, PHONE, PWD_UPDATE_DATE, IS_BANNED, AUTHORITY, EMAIL, CURRENT_LOGIN, JOIN_DATE, M.CHANGE_NAME AS CHANGE_NAME2, M.ORIGIN_NAME, LOGIN_METHOD
+		FROM CO_PURCHASE
+		JOIN BOARD B USING(BOARD_NO)
+		JOIN IMAGE I USING(BOARD_NO)
+		JOIN SUB_CATEGORY SC USING(CATEGORY_S_NO)
+		JOIN MEMBER M USING(USER_NO)
+		WHERE BOARD_NO = #{bNo}
+		AND B.STATUS = 'Y'
+	</select>
+	
+	<update id="updateCo_purchase" parameterType="co_purchase">
+		UPDATE CO_PURCHASE
+		   SET PRODUCT_NAME = #{productName}
+		     , PRICE = #{price}
+		     , RECRUITS_NUM = #{recruitsNum}
+		     , DEAD_LINE = #{deadLine}
+		     , LINK = #{link}    
+		     , IS_END = #{isEnd}
+		 WHERE BOARD_NO = #{boardNo}
+	</update>
+</mapper>

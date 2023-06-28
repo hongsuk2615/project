@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="wishListMapper">
+	<resultMap type="wishList" id="wishListResultSet">
+		<result column="USER_NO" property="userNo"/>
+		<result column="BOARD_NO" property="boardNo"/>
+	</resultMap>
+	
+	
+	<resultMap type="board" id="boardResultSet">
+		<id column="BOARD_NO" property="boardNo"/>
+		<result column="CATEGORY_S_NO"  property="categorySNo"/>
+		<result column="CHANGE_NAME"  property="content"/>
+		<result column="CREATE_DATE"  property="createDate"/>
+		<result column="READ_COUNT"  property="readCount"/>
+		<result column="REPORT_COUNT"  property="reportCount"/>
+		<result column="TITLE"  property="title"/>
+		<result column="USER_NO"  property="userNo"/>
+		<result column="WISH_COUNT"  property="wishCount"/>
+		<result column="CATEGORY_U_NO"  property="categoryUNo"/>
+		<result column="NICK_NAME" property="nickName"/>
+		<result column="LOGIN_METHOD" property="upperCategoryName"/>
+	</resultMap>
+	
+	
+	
+	
+	
+	
+	<insert id="insertWishList" parameterType="wishList">
+		INSERT INTO WISH_LIST VALUES(#{boardNo}, #{userNo})
+	</insert>
+	
+	<select id="selectWishList" parameterType="wishList" resultMap="wishListResultSet">
+		SELECT * 
+		  FROM WISH_LIST
+		 WHERE USER_NO = #{userNo}
+		   AND BOARD_NO = #{boardNo}
+	</select>
+	
+	<delete id="deleteWishList">
+		DELETE
+		FROM WISH_LIST
+		WHERE BOARD_NO = #{boardNo}
+			AND USER_NO = #{userNo}
+	</delete>
+	
+	
+	<select id="zzimSelect" resultMap="boardResultSet">
+	SELECT M.NICK_NAME,B.BOARD_NO, TITLE, M.CHANGE_NAME, CATEGORY_U_NO ,CATEGORY_PATH, M.LOGIN_METHOD
+		FROM WISH_LIST W
+		JOIN BOARD B USING(BOARD_NO)
+		JOIN MEMBER M ON(B.USER_NO = M.USER_NO)
+		JOIN UPPER_CATEGORY USING(CATEGORY_U_NO)
+		WHERE W.USER_NO= #{userNo} AND B.STATUS='Y'
+	</select>
+	
+	
+	
+
+</mapper>

@@ -1,0 +1,101 @@
+#login-content{
+    width: 100%;
+    height: 600px;
+    background-color: #4285F4;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 50px;
+    align-items: center;
+    color: white;
+}
+
+#login-content>div{
+    display: flex;
+}
+#title{
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+#title>div{
+    margin-left: 20px;
+}
+#login-form>form{
+    display: flex;
+    flex-direction: column;
+}
+
+#login-form>form>div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#login-form input{
+    width: 250px;
+    height: 50px;
+    border-radius: 5px;
+    margin: 10px 0px 10px 10px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid transparent;
+    color:white;
+    padding: 10px;
+}
+#login-form *:focus {
+    outline: 0;
+}
+
+#login-form button{
+    width: 310px;
+    height: 60px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    margin: 10px 0px;
+    font-size: 15px;
+    color: #4285F4;
+    font-weight: bold;
+}
+#sns-login fieldset{
+    width: 100%;
+    height: 0;
+    border: 0;
+    border-top: 1px dashed;
+    margin: 10px;
+}
+
+#login-others-btns{
+    justify-content: center;
+    width: 310px;
+}
+
+#login-others-btns>div{
+    margin: 10px;
+}
+#sns-login{
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#sns-login>div{
+    margin: 10px;
+}
+
+#google_login{
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    color: black;
+    font-weight: 500;
+    padding-right: 20px;
+}
+
+#google_login img{
+    padding: 10px;
+}
